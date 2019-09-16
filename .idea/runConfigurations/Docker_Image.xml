@@ -1,0 +1,30 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Docker Image" type="docker-deploy" factoryName="docker-image" server-name="Docker">
+    <deployment type="docker-image">
+      <settings>
+        <option name="command" value="" />
+        <option name="containerName" value="Coursera_Capstone" />
+        <option name="entrypoint" value="" />
+        <option name="imageTag" value="jupyter/datascience-notebook:latest" />
+        <option name="portBindings">
+          <list>
+            <DockerPortBindingImpl>
+              <option name="containerPort" value="8888" />
+              <option name="hostPort" value="8888" />
+            </DockerPortBindingImpl>
+          </list>
+        </option>
+        <option name="commandLineOptions" value="" />
+        <option name="volumeBindings">
+          <list>
+            <DockerVolumeBindingImpl>
+              <option name="containerPath" value="/home/jovyan/work/Coursera_Capstone" />
+              <option name="hostPath" value="C:\Users\User\OneDrive\Dokumente\MyWork\Learning\Coursera_Capstone" />
+            </DockerVolumeBindingImpl>
+          </list>
+        </option>
+      </settings>
+    </deployment>
+    <method v="2" />
+  </configuration>
+</component>
