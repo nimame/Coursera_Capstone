@@ -1,0 +1,4 @@
+lxml==4.4.1
+geocoder==1.38.1
+geopy==1.20.0
+folium==0.10.0

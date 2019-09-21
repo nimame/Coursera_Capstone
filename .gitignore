@@ -203,3 +203,5 @@ dmypy.json
 #   git rm -r .ipynb_checkpoints/
 #
 
+data
+out
