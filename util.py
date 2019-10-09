@@ -78,8 +78,8 @@ def get_triangular_bool(n_cols):
     return triang
 
 
-def plot_heatmap(data, columns):
-    fig, ax = plt.subplots(figsize=(15, 7))
+def plot_correlation_heatmap(data, columns, height: int = 7):
+    fig, ax = plt.subplots(figsize=(15, height))
     numbering = range(1, len(columns) + 1)
     sns.heatmap(
         data[columns].corr().round(2),
@@ -101,13 +101,14 @@ def get_service_url(name, request="GetCapabilities", service="WFS"):
     return f"{HAMBURG_GEOSERVICES_URL}/{name}?REQUEST={request}&SERVICE={service}"
 
 
-def get_service(name, service, version="2.0.0"):
+def get_service(name: str, service: str, version="2.0.0"):
     # https://geodienste.hamburg.de/HH_WFS_Bebauungsplaene?REQUEST=GetCapabilities&SERVICE=WFS
     # https://geodienste.hamburg.de/HH_WFS_Mietenspiegel?REQUEST=GetCapabilities&SERVICE=WFS
     # https://geodienste.hamburg.de/HH_WFS_Bebauungsplaene?REQUEST=GetCapabilities&SERVICE=WFS
     # https://geodienste.hamburg.de/HH_WFS_Bodenrichtwerte?REQUEST=GetCapabilities&SERVICE=WFS
     # https://geodienste.hamburg.de/HH_WFS_Bodenschaetzung?REQUEST=GetCapabilities&SERVICE=WFS
     # https://geodienste.hamburg.de/HH_WFS_Statistik_Stadtteile_Bevoelkerung?REQUEST=GetCapabilities&SERVICE=WFS
+    ws = None
     if service == "WFS":
         ws = WebFeatureService(url=get_service_url(name, service=service), version=version)
     elif service == "WMS":
@@ -120,12 +121,8 @@ def list_service_contents(name, service="WFS", version="2.0.0"):
     print(f"contents: {', '.join(list(ws.contents))}")
 
 
-def get_geodata(name, service, type_name, request='GetFeature', version="2.0.0"):
-    ws = get_service(name=service, service="WFS", version="2.0.0")
-    # url = get_service_url(name, service=service)
-    params = dict(service=service, version=version, request=request,
-                  typeName=type_name, outputFormat='application/geo+json')
-
+def get_geodata(name, service, type_name, version="2.0.0"):
+    ws = get_service(name=name, service=service, version=version)
     r = ws.getfeature(typename=type_name, outputFormat="application/geo+json")
     return r.read()
 
