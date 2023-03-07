@@ -3,7 +3,7 @@ lxml
 geocoder
 geopy
 folium
-owslib==0.18.0
+owslib==0.28.1
 geopandas==0.6.0
 Shapely
 rtree
